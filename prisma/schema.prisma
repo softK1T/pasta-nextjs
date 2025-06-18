@@ -1,0 +1,45 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model TelegramMessage {
+  message_id  Int   @id
+  date        DateTime?
+  text        String?
+  views       Int?
+  forwards    Int?
+  hashtags    String[]
+  telegraph_link String?
+  reactions   Json?
+  scraped_at  DateTime? @default(now())
+  processed_at DateTime?
+  last_updated DateTime?
+  TelegraphContent TelegraphContent? @relation(fields: [telegraph_link], references: [url])
+
+  @@map("telegram_messages")
+}
+
+model TelegraphContent {
+  url           String   @id
+  title         String?
+  content       String?
+  description   String?
+  mrakopedia_link String?
+  date_published DateTime?
+  processed_at  DateTime?
+  content_hash  String
+  description_hash String?
+  last_checked  DateTime?
+  word_count    Int
+  status        String   @default("active")
+  retry_count   Int      @default(0)
+  error_message String?
+  TelegramMessage TelegramMessage[]
+
+  @@map("telegraph_content")
+}
