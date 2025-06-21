@@ -64,7 +64,7 @@ export function pastaCard(pasta: Pasta) {
   );
 }
 
-export function renderHashtags(tags?: string[], max = 5) {
+export function renderHashtags(tags?: string[], max = 6) {
   if (!tags?.length) return null;
 
   const shown = tags.slice(0, max);
