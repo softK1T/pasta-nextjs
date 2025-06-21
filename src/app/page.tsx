@@ -1,18 +1,4 @@
-import PastaCard, {
-  pastaCard,
-  renderHashtags,
-  renderReactions,
-} from "@/components/pastaCard";
-import PopoverHint from "@/components/popoverHint";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Pasta, pastaCard } from "@/components/pastaCard";
 
 async function fetchPastas() {
   const response = await fetch(
@@ -34,7 +20,7 @@ export default async function Home() {
   return (
     <div className="justify-items-center min-h-screen p-8 pb-20 gap-16  font-[family-name:var(--font-geist-sans)]">
       <main className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-1fr">
-        {pastas.map((pasta: any) => pastaCard(pasta))}
+        {pastas.map((pasta: Pasta) => pastaCard(pasta))}
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
     </div>

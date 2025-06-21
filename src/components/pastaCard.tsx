@@ -9,7 +9,22 @@ import {
   CardFooter,
 } from "./ui/card";
 
-export function pastaCard(pasta: any) {
+type TelegramMessage = {
+  message_id: number;
+  views: number;
+  forwards: number;
+  reactions: Record<string, number>;
+  hashtags: string[];
+};
+
+export type Pasta = {
+  title?: string;
+  description: string;
+  url: string;
+  TelegramMessage: TelegramMessage[]; // API returns an array
+};
+
+export function pastaCard(pasta: Pasta) {
   return (
     <Card
       key={pasta.TelegramMessage[0].message_id}
@@ -49,7 +64,7 @@ export function pastaCard(pasta: any) {
   );
 }
 
-export function renderHashtags(tags?: string[], max = 6) {
+export function renderHashtags(tags?: string[], max = 5) {
   if (!tags?.length) return null;
 
   const shown = tags.slice(0, max);
@@ -80,9 +95,10 @@ export function renderHashtags(tags?: string[], max = 6) {
   );
 }
 
-export function renderReactions(reactions?: Reactions | null) {
+export function renderReactions(reactions?: Record<string, number>) {
   if (!reactions || !Object.keys(reactions).length) return null;
   const pairs = Object.entries(reactions).sort((a, b) => b[1] - a[1]);
+
   return (
     <ul className="flex gap-3 mt-3 text-base">
       {pairs.map(([emoji, count]) => (

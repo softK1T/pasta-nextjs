@@ -1,12 +1,11 @@
 "use client";
-import { Home, Info, Settings, Search, LanguagesIcon } from "lucide-react";
+import { Home, Info, Settings, Search } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
