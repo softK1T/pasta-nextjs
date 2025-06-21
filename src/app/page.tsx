@@ -1,5 +1,7 @@
 import { Pasta, pastaCard } from "@/components/pastaCard";
 
+export const dynamic = "force-dynamic";
+
 async function fetchPastas() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/pasta`,
