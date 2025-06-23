@@ -16,6 +16,7 @@ model TelegramMessage {
   hashtags    String[]
   telegraph_link String?
   reactions   Json?
+  reaction_total Int
   scraped_at  DateTime? @default(now())
   processed_at DateTime?
   last_updated DateTime?
