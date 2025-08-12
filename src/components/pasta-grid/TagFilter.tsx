@@ -37,12 +37,15 @@ export function TagFilter({ picked, toggle }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="min-w-[180px]">
+        <Button
+          variant="outline"
+          className="min-w-[180px] border-border/50 bg-background/50 dark:bg-background/30 hover:bg-background/70 dark:hover:bg-background/50"
+        >
           {picked.size ? `Tags (${picked.size})` : "Filter tags"}
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="p-0 w-60">
+      <PopoverContent className="p-0 w-60 border-border/50 bg-background/90 backdrop-blur-sm dark:bg-background/80">
         <Command>
           <CommandInput placeholder="Search tags…" />
           <CommandList>

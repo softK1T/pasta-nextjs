@@ -32,14 +32,6 @@ export async function GET(req: Request) {
   const limit = Math.min(Number(qp.get("take")) || 50, 100);
   const tags = parseTags(qp.get("tags"));
 
-  console.log(
-    pastasQuery({
-      sort,
-      dir: order.toUpperCase() as "ASC" | "DESC",
-      limit,
-      tags,
-    })
-  );
   const rows = await prisma.$queryRaw(
     pastasQuery({
       sort,
@@ -49,5 +41,11 @@ export async function GET(req: Request) {
     })
   );
 
-  return NextResponse.json(rows);
+  // Helpful cache header – safe for this list endpoint
+  const res = NextResponse.json(rows);
+  res.headers.set(
+    "Cache-Control",
+    "public, s-maxage=120, stale-while-revalidate=300"
+  );
+  return res;
 }
